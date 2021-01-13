@@ -23,6 +23,15 @@
                 <input type="hidden" name="id_hoja_asistencia" id="id_hoja_asistencia" value="<?php echo $value['id_hoja_asistencia'] ?>">
                 <input type="hidden" name="nombre_actividad" id="nombre_actividad" value="<?php echo $_POST['nombre_actividad']; ?>">
                 <input type="hidden" name="id_actividad" id="id_actividad" value="<?php echo $_POST['id_actividad']?>">
+
+            </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Genero</label>
+                <select id="generoActualizar" class="form-control">
+                  <option value="Masculino" <?php echo ($value['genero']== 'Masculino')? 'selected':' '?> >Masculino</option>
+                  <option value = "Fenemino" <?php echo ($value['genero']== 'Fenemino')? 'selected':' '?> >Femenino</option>
+
+                </select>
             </div>
                 <div class="form-group">
                   <input type="button" id="actualizar" class="btn btn-primary" value="Guardar">
@@ -43,13 +52,14 @@ document.getElementById('actualizar').addEventListener('click', actualizarInform
                         var nombre_actividad=document.getElementById('nombre_actividad').value;
                         var id_hoja_asistencia=document.getElementById('id_hoja_asistencia').value;
                         var id_Participante=document.getElementById('id_Participante').value;
+                        var genero=document.getElementById('generoActualizar').value;
                         console.log('Datos: ');
                        console.log('nombre: '+nombre);
                        console.log('id_Participante: '+id_Participante);
                       $.ajax({  
                             url:"../controladores/participantesControlador.php?accion=modificar",  
                             method:"POST",  
-                            data:{id_Participante:id_Participante,nombre:nombre,edad:edad,id_actividad:id_actividad,nombre_actividad:nombre_actividad,id_hoja_asistencia:id_hoja_asistencia},  
+                            data:{id_Participante:id_Participante,nombre:nombre,edad:edad,id_actividad:id_actividad,nombre_actividad:nombre_actividad,id_hoja_asistencia:id_hoja_asistencia,genero:genero},  
                             success:function(data){  
                                       console.log(data);
                                       var array = JSON.parse(data);

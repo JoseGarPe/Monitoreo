@@ -21,7 +21,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Sistema de Actividades</div>
       </a>
 
       <!-- Divider -->
@@ -31,7 +31,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="<?php echo (url_actual()!= null)? '../index.php':'index.php';?>">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Pagina Principal</span></a>
+          <span>Principal</span></a>
       </li>
 
       <!-- Divider -->
@@ -48,7 +48,7 @@
           <i class="fas fa-fw fa-cog"></i>
           <span>Mantenimiento</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseTwo" class="collapse show " aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Escoja una Opcion</h6>
 

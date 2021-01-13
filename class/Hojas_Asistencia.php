@@ -143,6 +143,13 @@ class Hoja_Asistencia extends Conexion
       $Listhoja_asistencias=$selectall->fetch_all(MYSQLI_ASSOC);
       return $Listhoja_asistencias;
   }
+  public function selectALL_ActividadUsuario($id_actividad,$id_usuario)
+  {
+      $query="SELECT u.*, tu.nombre as actividad, e.nombre as estado FROM hoja_asistencia u, actividad tu,estados e WHERE u.id_actividad = tu.id_actividad AND u.id_estado = e.id_estado AND u.id_actividad=".$id_actividad." AND u.id_usuario=".$id_usuario."";
+      $selectall=$this->db->query($query);
+      $Listhoja_asistencias=$selectall->fetch_all(MYSQLI_ASSOC);
+      return $Listhoja_asistencias;
+  }
       //------------------------------------------------------------------//
 
  }

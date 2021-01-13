@@ -12,11 +12,18 @@ if ($accion=='guardar') {
  }else{
  	$nombre=NULL;
  }
+ 
+ if (isset($_POST['id_usuario'])) {
+	$id_usuario=$_POST['id_usuario'];
+}else{
+	$id_usuario=NULL;
+}
  $estado=1;
  
  $usua = new Actividad();
  $usua->setNombre($nombre);
  $usua->setId_estado($estado);
+ $usua->setId_usuario($id_usuario);
  $save =$usua->save();
 
 	if ($save==TRUE) {

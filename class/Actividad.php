@@ -5,6 +5,7 @@ class Actividad extends conexion
 private $id_actividad;
 private $nombre;
 private $id_estado;
+private $id_usuario;
 
 public function __construct()
 {
@@ -13,6 +14,7 @@ public function __construct()
         $this->id_actividad= "";
         $this->nombre = "";
         $this->id_estado = "";
+        $this->id_usuario = "";
 
 }
 
@@ -39,10 +41,18 @@ public function __construct()
     public function setId_estado($id_estado) {
         $this->id_estado = $id_estado;
     }
+    
+    public function setId_usuario($id_usuario) {
+        $this->id_usuario = $id_usuario;
+    }
+    public function getId_usuario() {
+        return $this->id_usuario;
+    }
+
 
 public function save()
     {
-    	$query="INSERT INTO `actividad`(`id_actividad`, `nombre`, `id_estado`) VALUES(NULL,'".$this->nombre."','".$this->id_estado."');";
+    	$query="INSERT INTO `actividad`(`id_actividad`, `nombre`, `id_estado`, `id_usuario`) VALUES(NULL,'".$this->nombre."','".$this->id_estado."','".$this->id_usuario."');";
     	$save=$this->db->query($query);
     	if ($save==true) {
             return true;
@@ -75,6 +85,14 @@ public function save()
      public function selectALL()
     {
         $query="SELECT * FROM actividad";
+        $selectall=$this->db->query($query);
+        $ListTipoUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
+        return $ListTipoUsuario;
+    }
+    
+    public function selectALL_usuario($id_usuario)
+    {
+        $query="SELECT * FROM actividad WHERE id_usuario='".$id_usuario."'";
         $selectall=$this->db->query($query);
         $ListTipoUsuario=$selectall->fetch_all(MYSQLI_ASSOC);
         return $ListTipoUsuario;

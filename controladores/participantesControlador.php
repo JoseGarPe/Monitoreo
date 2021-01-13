@@ -31,6 +31,7 @@ if ($accion=='guardar') {
  $usua->setedad($edad);
  $usua->setId_centro($id_centro);
  $usua->setId_hoja_asistencia($hoja_asistencia);
+ $usua->setGenero($_POST['genero']);
  $save =$usua->save();
 
 	if ($save==TRUE) {
@@ -90,6 +91,7 @@ elseif($accion=="modificar") {
     $usua->setNombre($nombre);
     $usua->setedad($edad);
     $usua->setId_Participante($_POST['id_Participante']);
+    $usua->setGenero($_POST['genero']);
 	$update=$usua->update();
 	if ($update==true) {
 		$informacion = [

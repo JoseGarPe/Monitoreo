@@ -165,6 +165,7 @@ class Usuario extends Conexion
           }
            return true;
       }else{
+          session_start();
               $_SESSION['logged-in'] = false;
                $_SESSION['tiempo']=0;
               return false;

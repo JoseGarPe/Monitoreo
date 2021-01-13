@@ -13,6 +13,7 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Nombre</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" aria-describedby="emailHelp">
+                <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION['id_usuario']; ?>">
                 <small id="emailHelp" class="form-text text-muted">Nombre completo.</small>
             </div>
                        
@@ -33,9 +34,11 @@ document.getElementById('guardar').addEventListener('click', enviarInformacion);
                       function enviarInformacion(){
 
                         var nombre=document.getElementById('nombre').value;
+                        var id_usuario=document.getElementById('id_usuario').value;
 
                         var formData = new FormData();
                         formData.append('nombre', nombre);
+                        formData.append('id_usuario', id_usuario);
                         var xhr = new XMLHttpRequest();
                         xhr.onreadystatechange = function(){
                           if (this.readyState == 4 && this.status == 200) {

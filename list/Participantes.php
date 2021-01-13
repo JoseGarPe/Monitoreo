@@ -27,7 +27,7 @@ require_once "../class/Hojas_Asistencia.php";
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Sistema de Monitore y Seguimiento</title>
+  <title>Ingreso de Actividades</title>
 
   <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -139,7 +139,7 @@ require_once "../class/Hojas_Asistencia.php";
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Mantenimiento Participantess</h1>
+          <h1 class="h3 mb-2 text-gray-800">Mantenimiento Participantes</h1>
           <p class="mb-4">Administracion de Participantess, Creacion y modificacion</p>
 
           <!-- DataTales Example -->
@@ -151,9 +151,18 @@ require_once "../class/Hojas_Asistencia.php";
                 <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
                     <?php 
                         foreach ($DatosHA as $key) {
+
+
+                            $fecha=$key['fecha'];
+                            $hora=$key['hora'];
+
+
                             echo '<tr><td>Actividad</td><td>'.$nombre_actividad.'</td></tr>
                                   <tr><td>Fecha</td><td>'.$key['fecha'].'</td></tr>
                                   <tr><td>Hora</td><td>'.$key['hora'].'</td></tr>
+                                  <input type="hidden" id="fecha" value="'.$fecha.'">
+                                  <input type="hidden" id="hora" value="'.$hora.'">
+                                  <input type="hidden" id="nombre_actividad" value="'.$nombre_actividad.'">
                             ';
                             $estado=$key['id_estado'];
                         }
@@ -176,13 +185,17 @@ require_once "../class/Hojas_Asistencia.php";
               <!-- tabla de Participantess -->
 
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered" id="tableParticipantes" width="100%" cellspacing="0">
                   <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Departamento</th>
+                      <th>Municipio</th>
+                      <th>C.E</th>
+                      <th>Centro Educativo</th>
                       <th>Nombre</th>
                       <th>Edad</th>
-                      <th>Centro Educativo</th>
+                      <th>Genero</th>
                       <th>Editar</th>
                       <th>Eliminar</th>
                     </tr>
@@ -196,9 +209,14 @@ require_once "../class/Hojas_Asistencia.php";
 
                       <tr>
                       <td> <?php echo $dato['id_participante']; ?> </td>
+                      <td><?php echo $dato['depa']; ?></td>
+                      <td><?php echo $dato['muni']; ?></td>
+                      <td><?php echo $dato['code']; ?></td>
+                      <td><?php echo $dato['ce']; ?></td>
                       <td> <?php echo $dato['nombre']; ?> </td>
                       <td><?php echo $dato['edad']; ?></td>
-                      <td><?php echo $dato['ce']; ?></td>
+                      <td><?php echo $dato['genero']; ?></td>
+
                       <td><input type="button" name="edit" value="Editar" id_actividad="<?php echo $id_actividad?>" nombre_actividad="<?php echo $nombre_actividad?>" id_hoja_asistencia="<?php echo $dato["id_hoja_asistencia"]?>" id_Participante="<?php echo $dato["id_participante"]?>" class="btn btn-warning update_data" /></td>
                       <td>
                          <div class="btn-toolbar" role="toolbar">
@@ -289,11 +307,18 @@ require_once "../class/Hojas_Asistencia.php";
   <!-- Page level plugins -->
   <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
   <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 
   <!-- Page level custom scripts -->
   <script src="../js/demo/datatables-demo.js"></script>
    <script src="../js/sweetalert2.min.js"></script>
    <script src="../js/sweetAlert2.js"></script>
+
+
 <script>
  $(document).ready(function(){  
       //------------------------------------------------------//
@@ -357,6 +382,29 @@ require_once "../class/Hojas_Asistencia.php";
                });
          })
     });
+
+     $(document).ready(function() {
+
+
+
+var nombre_actividad=document.getElementById('nombre_actividad').value;
+var fecha=document.getElementById('fecha').value;
+var hora=document.getElementById('hora').value;
+
+    $('#tableParticipantes').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copyHtml5',
+            {
+              extend: 'excel',
+                messageTop: 'Actividad:'+nombre_actividad+' '+'Fecha:'+ fecha+' '+ hora
+            }
+            
+        ]
+
+
+    } );
+} );
 </script>
 </body>
 

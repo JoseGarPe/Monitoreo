@@ -3,12 +3,20 @@
 session_start();
 if (!isset($_SESSION['logged-in']) || $_SESSION['logged-in']==false ) {
   header('Location: ../login.php');
+}else{
+  $id_acceso=$_SESSION['Acceso'];
 }
+
 $id_actividad=$_GET['actividad'];
 $nombre_actividad=$_GET['nombre_actividad'];
 require_once "../class/Hojas_Asistencia.php";
 $Hoja_Asistencias = new Hoja_Asistencia();
-$ListHojasAsis = $Hoja_Asistencias->selectALL_Actividad ($id_actividad);
+if($id_acceso==1){
+  $ListHojasAsis = $Hoja_Asistencias->selectALL_Actividad($id_actividad);
+  }else{
+    $id_usuario=$_SESSION['id_usuario'];
+    $ListHojasAsis = $Hoja_Asistencias->selectALL_ActividadUsuario($id_actividad,$id_usuario);
+  }
 
 ?>
 <!DOCTYPE html>
@@ -174,7 +182,7 @@ $ListHojasAsis = $Hoja_Asistencias->selectALL_Actividad ($id_actividad);
                     <?php
 
                     foreach ($ListHojasAsis as $dato) {
-                      $link = $link="Participantes.php?actividad=".$id_actividad."&nombre_actividad=".$nombre_actividad."&hoja_asistencia=".$dato['id_hoja_asistencia'];
+                      $link = $link="Participantes.php?actividad=".$dato['id_actividad']."&nombre_actividad=".$nombre_actividad."&hoja_asistencia=".$dato['id_hoja_asistencia'];
                       ?>
 
                       <tr>

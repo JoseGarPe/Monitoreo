@@ -3,10 +3,18 @@
 session_start();
 if (!isset($_SESSION['logged-in']) || $_SESSION['logged-in']==false ) {
   header('Location: ../login.php');
+}else{
+  $id_acceso=$_SESSION['Acceso'];
 }
 require_once "../class/Actividad.php";
 $Actividads = new Actividad();
+if($id_acceso==1){
 $ListActi = $Actividads->selectALL();
+}else{
+  $id_usuario=$_SESSION['id_usuario'];
+  $ListActi = $Actividads-> selectALL_usuario($id_usuario);
+}
+
 
 ?>
 <!DOCTYPE html>

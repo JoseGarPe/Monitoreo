@@ -13,6 +13,7 @@
             <div class="form-gropu">
                 <label>Datos Participante de la Actividad: <?php echo $nombre_actividad; ?> </label>
                 <input type="hidden" name="id_actividad" id="id_actividad" value="<?php echo $id_actividad; ?>">
+                
                 <input type="hidden" name="id_hoja_asistencia" id="id_hoja_asistencia" value="<?php echo $id_hoja_asistencia; ?>">
                 <input type="hidden" name="nombre_actividad" id="nombre_actividad" value="<?php echo $nombre_actividad; ?>">
             </div>
@@ -38,6 +39,15 @@
                 <input type="text" readonly class="form-control" required id="nombre_ce" name="nombre_ce" aria-describedby="ceHelp">
                 <input type="hidden" name="id_centro" id="id_centro">
             </div>
+
+              <div class="form-group">
+                <label for="exampleInputEmail1">Genero</label>
+                <select id="genero" class="form-control">
+                  <option value="Masculino">Masculino</option>
+                  <option value = "Fenemino">Femenino</option>
+
+                </select>
+            </div>
            
         </form>
             
@@ -61,14 +71,17 @@ document.getElementById('guardar').addEventListener('click', enviarInformacion);
                         var id_centro=document.getElementById('id_centro').value;
                         var nombre_actividad=document.getElementById('nombre_actividad').value;
                         var id_hoja_asistencia=document.getElementById('id_hoja_asistencia').value;
+                         var genero=document.getElementById('genero').value;
 
                         var formData = new FormData();
                         formData.append('nombre', nombre);
                         formData.append('edad', edad);
                         formData.append('id_actividad', id_actividad);
                         formData.append('nombre_actividad', nombre_actividad);
-                        formData.append('id_hoja_asistencia', id_actividad);
+                        formData.append('id_hoja_asistencia', id_hoja_asistencia);
                         formData.append('id_centro', id_centro);
+                        formData.append('genero', genero);
+
                         console.log(formData);
                         var xhr = new XMLHttpRequest();
                         xhr.onreadystatechange = function(){
