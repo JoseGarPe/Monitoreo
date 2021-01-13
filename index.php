@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if (!isset($_SESSION['logged-in']) || $_SESSION['logged-in']==false ) {
+  header('Location: login.php');
+}else{
+  $id_acceso=$_SESSION['Acceso'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 

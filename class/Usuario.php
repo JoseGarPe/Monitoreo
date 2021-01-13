@@ -149,7 +149,7 @@ class Usuario extends Conexion
       return $ListUsuario;
   }
   public function login(){
-      $query1="SELECT u.*, tu.nombre as tipo FROM usuarios u INNER JOIN accesos tu ON tu.id_acceso=u.id_acceso WHERE correo='".$this->correo."' AND contrasena='".$this->contrasena."' AND u.id_estado=1";
+      $query1="SELECT u.*, tu.nombre as tipo FROM usuarios u INNER JOIN accesos tu ON tu.id_acceso=u.id_acceso WHERE u.correo='".$this->correo."' AND u.contrasena='".$this->contrasena."' AND u.id_estado=1";
       $selectall1=$this->db->query($query1);
       $ListUsuario=$selectall1->fetch_all(MYSQLI_ASSOC);
 
